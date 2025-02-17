@@ -8,6 +8,9 @@ const port = 3000;
 // Cấu hình thư mục chứa file tĩnh
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('view engine', 'ejs');  // Sử dụng EJS làm template engine
+app.set('views', './views');    // Đảm bảo file EJS nằm trong thư mục 'views'
+
 // Kết nối MySQL
 const db = mysql.createConnection({
     host: '127.0.0.1',
@@ -27,7 +30,7 @@ db.connect((err) => {
 
 // ✅ Route mặc định hiển thị home.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+    res.render('home');  // Render home.ejs
 });
 
 // ✅ Route danh sách nhà trọ
