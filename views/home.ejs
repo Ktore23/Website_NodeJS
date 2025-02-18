@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ - Tìm Nhà Trọ</title>
-    <link rel="stylesheet" href="/css/home.css">  <!-- Liên kết đến home.css -->
+    <link rel="stylesheet" href="/css/home.css"> <!-- Liên kết đến home.css -->
 </head>
+
 <body>
     <!-- Thanh điều hướng -->
     <nav>
-        <div class="logo">Tìm Nhà Trọ</div>
+        <div class="logo">Tìm Nhà Trọ Tốt</div>
         <ul>
             <li><a href="http://localhost:3000">Trang chủ</a></li>
-            <li><a href="/rooms" class="button">Nhà trọ</a></li>
+            <li><a href="/rooms" class="button">Chính sách</a></li>
             <li><a href="#">Liên hệ</a></li>
         </ul>
     </nav>
-    
+
     <!-- Thanh tìm kiếm -->
     <section class="search-bar">
         <input type="text" placeholder="Nhập khu vực cần tìm...">
         <button>Tìm kiếm</button>
     </section>
-    
+
     <!-- Danh sách nhà trọ -->
     <section class="rental-list">
         <h2>Danh sách nhà trọ</h2>
-        <div class="rental-item">
-            <img src="room1.jpg" alt="Nhà trọ 1">
-            <div>
-                <h3>Nhà trọ A</h3>
-                <p>Giá: 3.000.000 VNĐ</p>
-                <button>Xem chi tiết</button>
+
+        <% rooms.forEach(room=> { %>
+            <div class="rental-item">
+                <img src="/<%= room.image %>" alt="<%= room.name %>">
+                <div>
+                    <h3>
+                        <%= room.name %>
+                    </h3>
+                    <p>Giá: <%= parseInt(room.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> VNĐ</p>
+                    <a href="/room/<%= room.id %>"><button>Xem chi tiết</button></a>
+                </div>
             </div>
-        </div>
-        <div class="rental-item">
-            <img src="room2.jpg" alt="Nhà trọ 2">
-            <div>
-                <h3>Nhà trọ B</h3>
-                <p>Giá: 2.500.000 VNĐ</p>
-                <button>Xem chi tiết</button>
-            </div>
-        </div>
+            <% }) %>
+
     </section>
-    
+
+
     <!-- Chân trang -->
     <footer>
-        <p>&copy; 2025 Tìm Nhà Trọ. All rights reserved.</p>
+        <p>&copy; 2025 Tìm Nhà Trọ. Copyright by Nhóm tú đi tường.</p>
     </footer>
 </body>
+
 </html>

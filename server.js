@@ -7,6 +7,7 @@ const port = 3000;
 
 // Cấu hình thư mục chứa file tĩnh
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 app.set('view engine', 'ejs');  // Sử dụng EJS làm template engine
 app.set('views', './views');    // Đảm bảo file EJS nằm trong thư mục 'views'
@@ -28,10 +29,21 @@ db.connect((err) => {
     console.log("✅ Kết nối MySQL thành công!");
 });
 
-// ✅ Route mặc định hiển thị home.html
+// ✅ Route mặc định hiển thị home.ejs
 app.get('/', (req, res) => {
-    res.render('home');  // Render home.ejs
+    const sql = "SELECT * FROM rooms"; // Giả sử bảng của bạn tên là 'rooms'
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error("❌ Lỗi truy vấn MySQL:", err);
+            return res.status(500).send("Lỗi server");
+        }
+
+        // Render home.ejs và truyền danh sách nhà trọ vào
+        res.render('home', { rooms: results });
+    });
 });
+
 
 // ✅ Route danh sách nhà trọ
 app.get('/rooms', (req, res) => {
@@ -44,6 +56,25 @@ app.get('/rooms', (req, res) => {
         }
 
         res.render('index', { rooms: results });
+    });
+});
+
+// Route hiển thị chi tiết nhà trọ
+app.get('/room/:id', (req, res) => {
+    const roomId = req.params.id;
+    const sql = "SELECT * FROM rooms WHERE id = ?";
+
+    db.query(sql, [roomId], (err, results) => {
+        if (err) {
+            console.error("❌ Lỗi truy vấn MySQL:", err);
+            return res.status(500).send("Lỗi server");
+        }
+
+        if (results.length === 0) {
+            return res.status(404).send("Không tìm thấy nhà trọ");
+        }
+
+        res.render('detail', { room: results[0] });
     });
 });
 

@@ -1,0 +1,15 @@
+.detail-image {
+    width: 300px;  /* Cố định chiều rộng */
+    height: 200px; /* Cố định chiều cao */
+    object-fit: contain; /* Hiển thị toàn bộ ảnh mà không bị cắt */
+    border-radius: 10px; /* Bo góc nếu muốn */
+    background-color: #f0f0f0; /* Thêm màu nền nếu ảnh không lấp đầy */
+}
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

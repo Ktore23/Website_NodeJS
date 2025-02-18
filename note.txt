@@ -1,0 +1,5 @@
+- 15/02/2025: Bắt đầu dự án Website với NodeJS
+
+- 17/02/2024: Thêm giao diện home.ejs và kết nối CSDL MySQL
+
+- 18/02/2025: Sửa giao diện home.ejs và thêm detail.ejs, detaild.css
